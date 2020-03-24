@@ -77,6 +77,8 @@ Methods
 - Search
 - Sort
 
+Possibility to create link with several categoies and tags.
+
 _README under construction_
 <!-- _Detailed desc w/ purpose/usage, what does, motivation to create, why exists, other info for users/developers to have_ -->
 
@@ -124,38 +126,7 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 <!-- * _List of features the program should do, from simplest to more complex, handling all possible cases.  Can do as text or put in table, with example input and output_
   * _Example Input: expected input_
   * _Example Output: expected output_
-* _Example: The program does nothing to non-alphabetical characters, since they do not contain consonants or vowels._
-  * _Example Input: 3_
-  * _Example Output: 3_
-* _Example: The program adds "way" to single-letter words beginning with a vowel._
-  * _Example Input: i_
-  * _Example Output: iway_
-* _The program adds "way" to multi-letter words beginning with a vowel._
-  * _Example Input: open_
-  * _Example Output: openway_
-* _The program takes the single consonant from the beginning of the word and adds to the end with "ay"_
-  * _Example Input: latin_
-  * _Example Output: atinlay_
-* _The program takes all consecutive consonants from the beginning of the word and adds them to the end with "ay"_
-  * _Example Input: translator_
-  * _Example Output: anslatortray_
-* _The program takes beginning consonants and if it contains "q", also take the "u" after it and add them to the end with "ay"_
-  * _Example Input: squeal_
-  * _Example Output: ealsquay_
-* _Etc._ -->
-
-<!-- <details>
-  <summary>Click to expand to view specifications</summary>
-
-| Specification | Input | Output |
-| :-------------     | :------------- | :------------- |
-| **The program displays welcome message and menu with prices** | Application start | Welcome message and menu displayed |
-| **The program displays special deals in readable format** | Application start | Special deals displayed ("Buy 2, get 1 free" "3 for $5") |
-| **The program takes input of user that is not an integer, then assume 0 ordered** | Bread="aaa", Pastry="" | Bread=0, Pastry=0 |
-| **The program takes number of loaves of bread and pastries and displays totals** | Bread=4, Pastry=4 | Bread=$20, Pastry=$8, Total=$28 |
-| **If input qualifies for special deals, costs calculated using discounted price** | Bread=3, Pastry=3 | Bread=$10, Pastry=$5, Total=$15 |
-
-</details> -->
+ -->
 
 ## User Stories
 
