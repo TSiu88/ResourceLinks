@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ResourseLinks.Models
+namespace ResourceLinks.Models
 {
   public class Category
   {
@@ -12,10 +12,5 @@ namespace ResourseLinks.Models
     public int CategoryId { get; set; }
     public string Title { get; set; }
     public virtual ICollection<CategoryLink> Links { get; set; }
-
-    public Category()
-    {
-      this.Links = new HashSet<CategoryLink>();
-    }
   }
 }

@@ -3,24 +3,24 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace ResourseLinks.Models
+namespace ResourceLinks.Models
 {
-  public class ResourseLinksContextFactory : IDesignTimeDbContextFactory<ResourseLinksContext>
+  public class ResourseLinksContextFactory : IDesignTimeDbContextFactory<ResourceLinksContext>
   {
 
-    ProjectNameContext IDesignTimeDbContextFactory<ResourseLinksContext>.CreateDbContext(string[] args)
+    ResourceLinksContext IDesignTimeDbContextFactory<ResourceLinksContext>.CreateDbContext(string[] args)
     {
       IConfigurationRoot configuration = new ConfigurationBuilder()
           .SetBasePath(Directory.GetCurrentDirectory())
           .AddJsonFile("appsettings.json")
           .Build();
 
-      var builder = new DbContextOptionsBuilder<ResourseLinksContext>();
+      var builder = new DbContextOptionsBuilder<ResourceLinksContext>();
       var connectionString = configuration.GetConnectionString("DefaultConnection");
 
       builder.UseMySql(connectionString);
 
-      return new ResourseLinksContext(builder.Options);
+      return new ResourceLinksContext(builder.Options);
     }
   }
 }

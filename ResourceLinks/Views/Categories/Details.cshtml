@@ -2,19 +2,19 @@
   Layout = "_Layout";
 }
 
-@model ResourseLinks.Models.Category;
+@model ResourceLinks.Models.Category;
 
 <h2>Category Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
 
-@if(@Model.Items.Count == 0)
+@if(@Model.Links.Count == 0)
 {
-  <p>This category does not contain any items</p>
+  <p>This category does not contain any links</p>
 }
 else
 {
-  <h4>Items the category contains:</h4>
+  <h4>The category contains next links:</h4>
   <ul>
   @foreach(var join in Model.Links)
   {

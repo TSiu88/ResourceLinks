@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ResourceLinks.Models.Tag;
+
+<h2>Tag Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(@Model.Links.Count == 0)
+{
+  <p>This tag does not contain any links</p>
+}
+else
+{
+  <h4>The tag contains next links:</h4>
+  <ul>
+  @foreach(var join in Model.Links)
+  {
+    <li>@join.Link.Description</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
+<p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>
+<p>@Html.ActionLink("Back to tags", "Index")</p>

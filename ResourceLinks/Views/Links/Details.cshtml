@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model ResourseLinks.Models.Link
+@model ResourceLinks.Models.Link
 
 <h2>Item Details</h2>
 <hr />
@@ -18,7 +18,7 @@ else
   <ul>
   @foreach(var join in Model.Categories)
   {
-    <li>@join.Category.Name</li>
+    <li>@join.Category.Title</li>
     @using (Html.BeginForm("DeleteCategory", "Links"))
     {
       @Html.Hidden("joinId", @join.CategoryLinkId)

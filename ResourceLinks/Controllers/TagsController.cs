@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using ResourseLinks.Models;
+using ResourceLinks.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace ResourseLinks.Controllers
+namespace ResourceLinks.Controllers
 {
   public class TagsController : Controller
   {
-    private readonly ResourseLinksContext _db;
+    private readonly ResourceLinksContext _db;
 
-    public TagsController(ResourseLinksContext db)
+    public TagsController(ResourceLinksContext db)
     {
       _db = db;
     }
@@ -36,9 +36,9 @@ namespace ResourseLinks.Controllers
     public ActionResult Details(int id)
     {
       var thisTag = _db.Tags
-        .Include(tasg => tag.Links)
+        .Include(tag => tag.Links)
         .ThenInclude(join => join.Link)
-        .FirstOrDefault(category => category.CategoryId == id);
+        .FirstOrDefault(tag => tag.TagId == id);
       return View(thisTag);
     }
 
@@ -66,7 +66,7 @@ namespace ResourseLinks.Controllers
     public ActionResult DeleteConfirmed(int id)
     {
       var thisTag = _db.Tags.FirstOrDefault(tag => tag.TagId == id);
-      _db.Categories.Remove(thisTag);
+      _db.Tags.Remove(thisTag);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

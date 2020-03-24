@@ -1,9 +1,9 @@
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ResourseLinks
+namespace ResourceLinks
 {
-  class ResourseLinks
+  class ResourceLinks
   {
   public static void Main(string[] args)
     {

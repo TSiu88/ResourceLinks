@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using ResourseLinks.Models;
+using ResourceLinks.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace ResourseLinks.Controllers
+namespace ResourceLinks.Controllers
 {
   public class CategoriesController : Controller
   {
-    private readonly ResourseLinksContext _db;
+    private readonly ResourceLinksContext _db;
 
-    public CategoriesController(ResourseLinksContext db)
+    public CategoriesController(ResourceLinksContext db)
     {
       _db = db;
     }

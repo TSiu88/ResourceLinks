@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using ResourseLinks.Models;
+using ResourceLinks.Models;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ResourseLinks.Controllers
+namespace ResourceLinks.Controllers
 {
   public class LinksController : Controller
   {
-    private readonly ResourseLinksContext _db;
+    private readonly ResourceLinksContext _db;
 
-    public LinksController(ResourseLinksContext db)
+    public LinksController(ResourceLinksContext db)
     {
       _db = db;
     }

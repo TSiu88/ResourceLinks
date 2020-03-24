@@ -1,4 +1,4 @@
-namespace ResourseLinks.Models
+namespace ResourceLinks.Models
 {
   public class CategoryLink
   {       
