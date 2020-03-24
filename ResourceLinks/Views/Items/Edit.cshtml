@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ResourseLinks.Models.Link
+
+<h2>Edit</h2>
+
+<h4>Edit this task: @Html.DisplayFor(model => model.Description)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.LinkId)
+
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    @Html.Label("Select category")
+    @Html.DropDownList("CategoryId")
+
+    <input type="submit" value="Save" />
+}
+<p>@Html.ActionLink("Back to list", "Index")</p>

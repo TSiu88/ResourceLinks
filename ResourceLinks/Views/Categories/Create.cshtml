@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ResourseLinks.Models.Category
+
+<h4>Add a new category</h4>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Title)
+    @Html.TextBoxFor(model => model.Title)
+    <input type="submit" value="Add new category" />
+}
+<p>@Html.ActionLink("Back to categories list", "Index")</p>
