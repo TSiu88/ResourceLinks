@@ -8,6 +8,7 @@ namespace ResourceLinks.Models
     public DbSet<Link> Links { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<CategoryLink> CategoryLink { get; set; }
+    public DbSet<LinkTag> LinkTag { get; set; }
 
     public ResourceLinksContext(DbContextOptions options) : base(options) { }
   }

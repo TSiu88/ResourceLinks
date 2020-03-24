@@ -5,11 +5,11 @@
 @using ResourceLinks.Models;
 @model List<ResourceLinks.Models.Link>;
 
-<h1>Items</h1>
+<h1>Links</h1>
 
 @if (@Model.Count == 0)
 {
-  <h3>No items have been added yet!</h3>
+  <h3>No links have been added yet!</h3>
 } 
 
 <ul>
@@ -19,5 +19,5 @@
   }
 </ul>
 
-<p>@Html.ActionLink("Add new item", "Create")</p>
+<p>@Html.ActionLink("Add new link", "Create")</p>
 <p>@Html.ActionLink("Return Home", "Index", "Home")</p>

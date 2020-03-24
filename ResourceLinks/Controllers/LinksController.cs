@@ -23,7 +23,8 @@ namespace ResourceLinks.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
+      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
       return View();
     }
 
@@ -44,6 +45,8 @@ namespace ResourceLinks.Controllers
       var thisLink = _db.Links
         .Include(link => link.Categories)
         .ThenInclude(join => join.Category)
+        .Include(link => link.Tags)
+        .ThenInclude(join => join.Tag)
         .FirstOrDefault(link => link.LinkId == id);
       return View(thisLink);
     }
@@ -90,11 +93,12 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddCategory(Link link, int CategoryId)
+    public ActionResult AddCategory(Link link, int CategoryId, int TagId)
     {
       if (CategoryId != 0)
       {
       _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
+      _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");

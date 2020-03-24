@@ -4,15 +4,39 @@
 
 @model ResourceLinks.Models.Link
 
-<h4>Add a new task</h4>
+<h4>Add a new link</h4>
 @using (Html.BeginForm())
 {
+    @Html.LabelFor(model => model.ResourceName)
+    @Html.TextBoxFor(model => model.ResourceName)
+    <br>
+    <br>
+    @Html.LabelFor(model => model.LinkUrl)
+    @Html.TextBoxFor(model => model.LinkUrl)
+    <br>
+    <br>
     @Html.LabelFor(model => model.Description)
     @Html.TextBoxFor(model => model.Description)
-
-    @Html.Label("Select category")
-    @Html.DropDownList("CategoryId")
+    <br>
+    <br>
+    @* @Html.Label("Select category")
+    @Html.DropDownList("CategoryId", "Select Category") *@
+    @foreach (int categoryId in @ViewBag.CategoryId)
+    {
+      @* @Html.CheckBox("CategoryId", "Title") *@
+      @* @Html.CheckBoxFor(model => model.Categories.Category.Category.CategoryId, new {Value = categoryId}) *@
+      @if()
+        {
+          <text> checked </text> 
+        }
+    }
+    <br>
+    <br>
+    @Html.Label("Select tag")
+    @Html.DropDownList("TagId", "Select Tag")
+    <br>
+    <br>    
     <input type="submit" value="Add new task" class="btn btn-default"/>
 }
-<p>@Html.ActionLink("Show all items", "Index")</p>
+<p>@Html.ActionLink("Show all links", "Index")</p>
 <p>@Html.ActionLink("Return Home", "Index", "Home")</p>
