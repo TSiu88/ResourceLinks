@@ -4,8 +4,9 @@
 
 @using ResourceLinks.Models;
 @model List<ResourceLinks.Models.Category>;
-
-<h1>Categories</h1>
+<div class="jumbotron">
+  <h1>Categories</h1>
+</div>
 
 @if (@Model.Count == 0)
 {
@@ -15,7 +16,7 @@
 <ul>
   @foreach (Category category in Model)
   {
-    <li>@Html.ActionLink($"{category.Title}", "Details", new { id = category.CategoryId })</li>
+    <h3>@Html.ActionLink($"{category.Title}", "Details", new { id = category.CategoryId })</h3>
     <p>
       @Html.ActionLink("Edit", "Edit", new { id = category.CategoryId}) | 
       @Html.ActionLink("Delete", "Delete", new { id = category.CategoryId})
@@ -23,5 +24,11 @@
   }
 </ul>
 
-<p>@Html.ActionLink("Add new category", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<div class="links2">
+  <div class="link">
+    <p>@Html.ActionLink("Add new category", "Create")</p>
+  </div>
+  <div class="link">
+  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  </div>
+</div>

@@ -19,12 +19,8 @@
     @Html.TextAreaFor(model => model.Description)
     <br>
     <br>
-    @foreach (SelectListItem categoryId in @ViewBag.CategoryId)
-    { 
-      @Html.CheckBox("Category", new { value = categoryId.Text })
-      @categoryId.Text
-      <br>
-    }
+    @Html.Label("Select category")
+    @Html.DropDownList("CategoryId", "Select Category")
     <br>
     <br>
     @Html.Label("Select tag")
@@ -35,3 +31,14 @@
 }
 <p>@Html.ActionLink("Show all links", "Index")</p>
 <p>@Html.ActionLink("Return Home", "Index", "Home")</p>
+
+
+    @* @foreach (SelectListItem categoryId in @ViewBag.CategoryId)
+    { 
+      @Html.HiddenFor(model => model.Categories)
+      @Html.CheckBox("Category", new { id = categoryId.Value })
+      @Html.CheckBoxFor(model => model.Value, new { id = categoryId.Value })
+      <input type="checkbox" name="selected" id=categoryId.Value />
+      @categoryId.Text
+      @Html.CheckBoxFor(x => ViewBag.CategoryId)
+    } *@

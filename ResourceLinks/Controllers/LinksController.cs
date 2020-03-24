@@ -37,7 +37,10 @@ namespace ResourceLinks.Controllers
         _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
         
       }
-      _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
+      if (TagId != 0)
+      {
+        _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -56,16 +59,21 @@ namespace ResourceLinks.Controllers
     public ActionResult Edit(int id)
     {
       var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
+      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
       return View(thisLink);
     }
 
     [HttpPost]
-    public ActionResult Edit(Link link, int CategoryId)
+    public ActionResult Edit(Link link, int CategoryId, int TagId)
     {
-      if (CategoryId != 0)
+      if (CategoryId != 0 && _db.CategoryLink.Find(CategoryId) != null)
       {
         _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
+      }
+      if (TagId != 0 && _db.LinkTag.Find(TagId) != null)
+      {
+        _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
       }
       _db.Entry(link).State = EntityState.Modified;
       _db.SaveChanges();
