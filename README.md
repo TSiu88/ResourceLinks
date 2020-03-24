@@ -22,14 +22,26 @@
 4. [Specifications](#specifications)
 5. [User Stories](#user-stories)
 6. [Screenshots](#screenshots)
-7. [Test Case Example](#test-case-example)
-8. [Known Bugs](#known-bugs)
-9. [Support and Contact Details](#support-and-contact-details)
-10. [License](#license)
+7. [Known Bugs](#known-bugs)
+8. [Support and Contact Details](#support-and-contact-details)
+9. [License](#license)
 ---
 ## Description
 
+#### 3/24/20 Work from Home Summary
+- University Registrar
+  - Add password authorization
+- Resource Links
+  - Design project to be applicable for recent events
+  - Able to apply project to any other resource link sharing
+- Career Services Presentation on CVs/Cover Letters/Resumes
+- Struggles:
+  - Many-to-many relationships creating multiple relationship with checkboxes
+  - Checkboxes being enabled and interactable with HTML helpers and passing it into the controller
+
 #### Notes
+Be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation where sharing a large amount of resource links.  This application will consolidate links to be viewable in one place and organized by category.
+
 Class Category, Class link, Class tag
 - categorylink, linktag
 - links have multiple categories
@@ -72,8 +84,10 @@ Class Tag
 - Time sensitive
 - Limited time
 - Global
+- Statistics?
+- Data/Research?
 
-Methods
+Extra Methods
 - Search
 - Sort
 
@@ -154,7 +168,7 @@ _There are currently no known bugs in this program_
 
 ## Support and contact details
 
-_If there are any question or concerns please contact us at our emails: [Tiffany Siu](mailto:tsiu88@gmail.com) and [Andriy Veremyeyev](mailto:#). Thank you._
+_If there are any question or concerns please contact us at our emails: [Tiffany Siu](mailto:tsiu88@gmail.com) and [Andriy Veremyeyev](mailto:belyybrat@gmail.com). Thank you._
 
 ### License
 
