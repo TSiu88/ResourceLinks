@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ProjectName.Models;
+@model List<ProjectName.Models.Item>;
+
+<h1>Items</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No items have been added yet!</h3>
+} 
+
+<ul>
+  @foreach (Item item in Model)
+  {
+    <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+  }
+</ul>
+
+<p>@Html.ActionLink("Add new item", "Create")</p>
+<p>@Html.ActionLink("Return Home", "Index", "Home")</p>
