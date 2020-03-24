@@ -15,9 +15,11 @@
 <ul>
   @foreach (Link link in Model)
   {
-    <li>@Html.ActionLink($"{link.Description}", "Details", new { id = link.LinkId })</li>
+    <li>@Html.ActionLink($"{link.ResourceName}", "Details", new { id = link.LinkId })</li>
   }
 </ul>
 
 <p>@Html.ActionLink("Add new link", "Create")</p>
+<p>@Html.ActionLink("Edit link", "Edit")</p>
+<p>@Html.ActionLink("Delete link", "Delete")</p>
 <p>@Html.ActionLink("Return Home", "Index", "Home")</p>

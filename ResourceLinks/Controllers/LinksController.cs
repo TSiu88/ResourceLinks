@@ -29,13 +29,15 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Link link, int CategoryId)
+    public ActionResult Create(Link link, int CategoryId, int TagId)
     {
       _db.Links.Add(link);
       if (CategoryId != 0)
       {
         _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
+        
       }
+      _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

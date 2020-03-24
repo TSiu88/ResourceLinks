@@ -16,19 +16,14 @@
     <br>
     <br>
     @Html.LabelFor(model => model.Description)
-    @Html.TextBoxFor(model => model.Description)
+    @Html.TextAreaFor(model => model.Description)
     <br>
     <br>
-    @* @Html.Label("Select category")
-    @Html.DropDownList("CategoryId", "Select Category") *@
-    @foreach (int categoryId in @ViewBag.CategoryId)
-    {
-      @* @Html.CheckBox("CategoryId", "Title") *@
-      @* @Html.CheckBoxFor(model => model.Categories.Category.Category.CategoryId, new {Value = categoryId}) *@
-      @if()
-        {
-          <text> checked </text> 
-        }
+    @foreach (SelectListItem categoryId in @ViewBag.CategoryId)
+    { 
+      @Html.CheckBox("Category", new { value = categoryId.Text })
+      @categoryId.Text
+      <br>
     }
     <br>
     <br>
@@ -36,7 +31,7 @@
     @Html.DropDownList("TagId", "Select Tag")
     <br>
     <br>    
-    <input type="submit" value="Add new task" class="btn btn-default"/>
+    <input type="submit" value="Add new link" class="btn btn-default"/>
 }
 <p>@Html.ActionLink("Show all links", "Index")</p>
 <p>@Html.ActionLink("Return Home", "Index", "Home")</p>
