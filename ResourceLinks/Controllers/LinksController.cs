@@ -102,25 +102,24 @@ namespace ResourceLinks.Controllers
     public ActionResult AddCategory(int id)
     {
       Link thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      // var LinkCategories = _db.CategoryLink.Where(c => c.LinkId == id).ToList();
-      // foreach(CategoryLink element in LinkCategories)
-      // {
-      //   Category thisCategory = _db.Categories.Find(element.CategoryId);
-      //   allCategories.Remove(thisCategory);
-      // }
-      // ViewBag.CategoryId = new SelectList(allCategories, "CategoryId", "Title");
-      
       List<Category> selectedCategories =  _db.Categories.ToList();
-
-      foreach (Category category in _db.Categories.ToList())
+      var LinkCategories = _db.CategoryLink.Where(c => c.LinkId == id).ToList();
+      foreach(CategoryLink element in LinkCategories)
       {
-        if (thisLink.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId) != null)
-        {
-          selectedCategories.Remove(category);
-        }
+        Category thisCategory = _db.Categories.Find(element.CategoryId);
+        selectedCategories.Remove(thisCategory);
       }
-      
       ViewBag.CategoryId = new SelectList(selectedCategories, "CategoryId", "Title");
+
+      // foreach (Category category in _db.Categories.ToList())
+      // {
+      //   if (thisLink.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId) != null)
+      //   {
+      //     selectedCategories.Remove(category);
+      //   }
+      // }
+      
+      // ViewBag.CategoryId = new SelectList(selectedCategories, "CategoryId", "Title");
 
       //ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
       return View(thisLink);
@@ -129,21 +128,9 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult AddCategory(Link link, int CategoryId)
     {
-      if (_db.Categories.FirstOrDefault(c => c.Title == _db.Categories.Find(CategoryId).Title) != null)
-      {
-        TempData ["message"] = "Category already exists!";
-        return RedirectToAction("AddCategory");
-      }
-      else
-      {
-        _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
-        _db.SaveChanges();
-        return RedirectToAction("Details", new {id = link.LinkId});
-      }
-      // if (CategoryId != 0)
-      // {
-
-      // }
+      _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = link.LinkId});
     }
 
     public ActionResult AddTag(int id)
