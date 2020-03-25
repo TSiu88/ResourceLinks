@@ -1,6 +1,7 @@
 @{
   Layout = "_Layout";
 }
+@using System.Security.Claims
 <div class ="homepage">
 <div class="jumbotron">
   <h1>Welcome to the Resource Links!</h1>
@@ -22,5 +23,20 @@
   </div>
   <div class="link">
     <p>@Html.ActionLink("Create an account", "Index", "Account")</p>
+  </div>
+  <div class="link">
+    @if(@User.Identity.Name == null)
+    {
+      <p>@Html.ActionLink("Log in", "Login", "Account")</p>
+    }
+    else
+    {
+      @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logout"}))
+      {
+        @* @Html.Hidden("User", User)
+        <a href="Account/Index" onclick="document.logout.submit();">Log out</a> *@
+        <input type="submit" class="btn btn-default logoutButton" value="Log out" />
+      }
+    }
   </div>
 </div>

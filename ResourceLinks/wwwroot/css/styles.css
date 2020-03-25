@@ -30,6 +30,12 @@
   justify-content: space-around;
 }
 
+.logoutButton {
+  color: #1c6fff;
+  vertical-align: top;
+  padding-top: 0px;
+}
+
 p {
   font-size: 15px;
 }

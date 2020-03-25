@@ -55,6 +55,7 @@ namespace ResourceLinks.Controllers
       var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       var currentUser = await _userManager.FindByIdAsync(userId);
       link.User = currentUser;
+
       _db.Links.Add(link);
       if (CategoryId != 0)
       {
@@ -69,6 +70,8 @@ namespace ResourceLinks.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
+
     public ActionResult Edit(int id)
     {
       var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
@@ -76,13 +79,17 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Link link, int CategoryId, int TagId)
+    public async Task<ActionResult> Edit(Link link, int CategoryId, int TagId)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      link.User = currentUser;
       _db.Entry(link).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Details", new {id = link.LinkId});
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);

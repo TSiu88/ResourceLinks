@@ -23,15 +23,18 @@ else
   @foreach(var join in Model.Categories)
   {
     <li>@join.Category.Title</li>
-    @using (Html.BeginForm("DeleteCategory", "Links"))
+    @if(@User.Identity.Name != null)
     {
-      @Html.Hidden("joinId", @join.CategoryLinkId)
-      <input type="submit" value="Delete"/>
+      @using (Html.BeginForm("DeleteCategory", "Links"))
+      {
+        @Html.Hidden("joinId", @join.CategoryLinkId)
+        <input type="submit" value="Delete"/>
+      }  
     }
+    
   }
   </ul>
 }
-
 
 @if(@Model.Tags.Count == 0)
 {
@@ -44,28 +47,35 @@ else
   @foreach(var join in Model.Tags)
   {
     <li>@join.Tag.Name</li>
-    @using (Html.BeginForm("DeleteTag", "Links"))
+    @if(@User.Identity.Name != null)
     {
-      @Html.Hidden("joinId", @join.LinkTagId)
-      <input type="submit" value="Delete"/>
+      @using (Html.BeginForm("DeleteTag", "Links"))
+      {
+        @Html.Hidden("joinId", @join.LinkTagId)
+        <input type="submit" value="Delete"/>
+      }  
     }
   }
   </ul>
 }
 
 <div class="footer">
-  <div class="link">
-    @Html.ActionLink("Edit Link", "Edit", new { id = Model.LinkId })
-  </div>
-  <div class="link">
-    @Html.ActionLink("Add a Category", "AddCategory", new { id = Model.LinkId })
-  </div>
-  <div class="link">
-    @Html.ActionLink("Add a Tag", "AddTag", new { id = Model.LinkId })
-  </div>
-  <div class="link">
-    @Html.ActionLink("Delete Link", "Delete", new { id = Model.LinkId })
-  </div>
+  @if(@User.Identity.Name != null)
+  {
+    <div class="link">
+      @Html.ActionLink("Edit Link", "Edit", new { id = Model.LinkId })
+    </div>
+    <div class="link">
+      @Html.ActionLink("Add a Category", "AddCategory", new { id = Model.LinkId })
+    </div>
+    <div class="link">
+      @Html.ActionLink("Add a Tag", "AddTag", new { id = Model.LinkId })
+    </div>
+    <div class="link">
+      @Html.ActionLink("Delete Link", "Delete", new { id = Model.LinkId })
+    </div>  
+  }
+  
   <div class="link">
     @Html.ActionLink("Back to list", "Index")
   </div>  

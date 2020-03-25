@@ -5,19 +5,24 @@
 @using ResourceLinks.ViewModels
 
 @model RegisterViewModel
-
-<h2>Register a new user</h2>
-<hr />
+<div class="jumbotron">
+  <h2>Register a new user</h2>
+</div>
+<hr/>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     @Html.LabelFor(user => user.Email)
     @Html.TextBoxFor(user=> user.Email)
-
+    <br>
+    <br>
     @Html.LabelFor(user=> user.Password)
     @Html.PasswordFor(user=> user.Password)
-
+    <br>
+    <br>
     @Html.LabelFor(user=> user.ConfirmPassword)
     @Html.PasswordFor(user=> user.ConfirmPassword)
-
-    <input type="submit" value="Register" />
+    <br>
+    <br>
+    <input type="submit" class="btn btn-secondary" value="Register" />
 }
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

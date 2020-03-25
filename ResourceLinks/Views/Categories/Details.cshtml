@@ -16,22 +16,26 @@
 }
 else
 {
-  <h4>The category contains next links:</h4>
+  <h4>The category contains links:</h4>
   <ul>
   @foreach(var join in Model.Links)
   {
-    <li>@join.Link.Description</li>
+    <li>@join.Link.ResourceName</li>
   }
   </ul>
 }
 
 <div class="footer">
-  <div class="link">
-    @Html.ActionLink("Edit Category", "Edit", new { id = Model.CategoryId })
-  </div>
-  <div class="link">
-    @Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })
-  </div>
+  @if(@User.Identity.Name != null)
+  {
+    <div class="link">
+      @Html.ActionLink("Edit Category", "Edit", new { id = Model.CategoryId })
+    </div>
+    <div class="link">
+      @Html.ActionLink("Delete Category", "Delete", new { id = Model.CategoryId })
+    </div>  
+  }
+  
   <div class="link">
     @Html.ActionLink("Back to categories", "Index")
   </div>

@@ -18,17 +18,25 @@
   @foreach (Tag tag in Model)
   {
     <h3>@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</h3>
-    <p>
-      @Html.ActionLink("Edit", "Edit", new { id = tag.TagId}) | 
-      @Html.ActionLink("Delete", "Delete", new { id = tag.TagId})
-    </p>
+    @if(@User.Identity.Name != null)
+    {
+      <p>
+        @Html.ActionLink("Edit", "Edit", new { id = tag.TagId}) | 
+        @Html.ActionLink("Delete", "Delete", new { id = tag.TagId})
+      </p> 
+    }
+    
   }
 </ul>
 
 <div class="footer">
-  <div class="link">
-    @Html.ActionLink("Add new tag", "Create")
-  </div>
+  @if(@User.Identity.Name != null)
+  {
+    <div class="link">
+      @Html.ActionLink("Add new tag", "Create")
+    </div>  
+  }
+  
   <div class="link">
     @Html.ActionLink("Home", "Index", "Home")
   </div>

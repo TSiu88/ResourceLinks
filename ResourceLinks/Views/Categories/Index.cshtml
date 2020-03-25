@@ -17,17 +17,25 @@
   @foreach (Category category in Model)
   {
     <h3>@Html.ActionLink($"{category.Title}", "Details", new { id = category.CategoryId })</h3>
-    <p>
-      @Html.ActionLink("Edit", "Edit", new { id = category.CategoryId}) | 
-      @Html.ActionLink("Delete", "Delete", new { id = category.CategoryId})
-    </p>
+    @if(@User.Identity.Name != null)
+    {
+      <p>
+        @Html.ActionLink("Edit", "Edit", new { id = category.CategoryId}) | 
+        @Html.ActionLink("Delete", "Delete", new { id = category.CategoryId})
+      </p>  
+    }
+    
   }
 </ul>
 
 <div class="footer">
-  <div class="link">
-    @Html.ActionLink("Add new category", "Create")
-  </div>
+  @if(@User.Identity.Name != null)
+  {
+    <div class="link">
+      @Html.ActionLink("Add new category", "Create")
+    </div>  
+  }
+  
   <div class="link">
     @Html.ActionLink("Home", "Index", "Home")
   </div>

@@ -17,16 +17,20 @@
 }
 else
 {
-  <h4>The tag contains next links:</h4>
+  <h4>The tag contains links:</h4>
   <ul>
   @foreach(var join in Model.Links)
   {
-    <li>@join.Link.Description</li>
+    <li>@join.Link.ResourceName</li>
   }
   </ul>
 }
 <div class="footer">
-  <p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
-  <p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>
+  @if(@User.Identity.Name != null)
+  {
+    <p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
+    <p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>  
+  }
+  
   <p>@Html.ActionLink("Back to tags", "Index")</p>  
 </div>

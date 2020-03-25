@@ -17,7 +17,7 @@ namespace ResourceLinks.Controllers
     private readonly UserManager<ApplicationUser> _userManager;
 
 
-    public CategoriesController(UserManager<ApplicationUser> userManager,ResourceLinksContext db)
+    public CategoriesController(UserManager<ApplicationUser> userManager, ResourceLinksContext db)
     {
       _userManager = userManager;
       _db = db;
@@ -50,8 +50,11 @@ namespace ResourceLinks.Controllers
     }
     
     [HttpPost]
-    public ActionResult Create(Category category)
+    public async Task<ActionResult> Create(Category category)
     { 
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      category.User = currentUser;
       if (category.Title == null)
       {
         TempData ["message"] = "Category Title is empty!";
@@ -71,7 +74,7 @@ namespace ResourceLinks.Controllers
     }
 
 
-
+    [Authorize]
     public ActionResult Edit(int id)
     {
       if(TempData["message"] != null)
@@ -84,7 +87,7 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Category category)
+    public async Task<ActionResult> Edit(Category category)
     {
       if (category.Title == null)
       {
@@ -108,6 +111,7 @@ namespace ResourceLinks.Controllers
       }
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
@@ -115,7 +119,7 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int id)
+    public async Task<ActionResult> DeleteConfirmed(int id)
     {
       var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
       _db.Categories.Remove(thisCategory);

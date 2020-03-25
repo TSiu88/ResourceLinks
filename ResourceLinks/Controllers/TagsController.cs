@@ -3,15 +3,23 @@ using Microsoft.AspNetCore.Mvc;
 using ResourceLinks.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ResourceLinks.Controllers
 {
   public class TagsController : Controller
   {
     private readonly ResourceLinksContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     public TagsController(ResourceLinksContext db)
     {
+       _userManager = userManager;
       _db = db;
     }
 
@@ -20,6 +28,16 @@ namespace ResourceLinks.Controllers
       return View(_db.Tags.ToList());
     }
 
+    public ActionResult Details(int id)
+    {
+      var thisTag = _db.Tags
+        .Include(tag => tag.Links)
+        .ThenInclude(join => join.Link)
+        .FirstOrDefault(tag => tag.TagId == id);
+      return View(thisTag);
+    }    
+
+    [Authorize]
     public ActionResult Create()
     {
       if(TempData["message"] != null)
@@ -31,8 +49,12 @@ namespace ResourceLinks.Controllers
     }
     
     [HttpPost]
-    public ActionResult Create(Tag tag)
+    public async Task<ActionResult> Create(Tag tag)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      tag.User = currentUser;
+
       if (tag.Name == null)
       {
         TempData ["message"] = "Tag Name is empty!";
@@ -51,15 +73,7 @@ namespace ResourceLinks.Controllers
       }
     }
 
-    public ActionResult Details(int id)
-    {
-      var thisTag = _db.Tags
-        .Include(tag => tag.Links)
-        .ThenInclude(join => join.Link)
-        .FirstOrDefault(tag => tag.TagId == id);
-      return View(thisTag);
-    }
-
+    [Authorize]
     public ActionResult Edit(int id)
     {
       if(TempData["message"] != null)
@@ -72,7 +86,7 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Tag tag)
+    public async Task<ActionResult> Edit(Tag tag)
     {
       if (tag.Name == null)
       {
@@ -96,6 +110,7 @@ namespace ResourceLinks.Controllers
       }
     }
 
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisTag = _db.Tags.FirstOrDefault(tag => tag.TagId == id);
@@ -103,7 +118,7 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int id)
+    public async Task<ActionResult> DeleteConfirmed(int id)
     {
       var thisTag = _db.Tags.FirstOrDefault(tag => tag.TagId == id);
       _db.Tags.Remove(thisTag);

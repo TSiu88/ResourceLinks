@@ -5,16 +5,22 @@
 @using ResourceLinks.ViewModels
 
 @model LoginViewModel
-
-<h2>Log in with your account</h2>
-<hr />
+<div class="jumbotron">
+  <h2>Log in with your account</h2>
+</div>
+<hr/>
 @using (Html.BeginForm())
 {
     @Html.LabelFor(m => m.Email)
     @Html.TextBoxFor(m => m.Email)
-
+    <br>
+    <br>
     @Html.LabelFor(m => m.Password)
     @Html.PasswordFor(m => m.Password)
-
-    <input type="submit" value="Log in" class="btn btn-default" />
+    <br>
+    <br>
+    <input type="submit" value="Log in" class="btn btn-secondary" />
 }
+
+<p>@Html.ActionLink("Register", "Register")</p>
+<p>@Html.ActionLink("Return Home", "Index", "Home")</p>
