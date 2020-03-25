@@ -11,11 +11,12 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.ResourceName)
-    @Html.TextBoxFor(model => model.ResourceName)
+    @Html.TextBoxFor(model => model.ResourceName) 
     <br>
     <br>
+    <p>Please enter full URL including "https://":</p>
     @Html.LabelFor(model => model.LinkUrl)
-    @Html.TextBoxFor(model => model.LinkUrl)
+    @Html.TextBoxFor(model => model.LinkUrl) 
     <br>
     <br>
     @Html.LabelFor(model => model.Description)
@@ -23,17 +24,24 @@
     <br>
     <br>
     @Html.Label("Select category")
-    @Html.DropDownList("CategoryId")
+    @Html.DropDownList("CategoryId", "Select Category")
     <br>
     <br>
     @Html.Label("Select tag")
     @Html.DropDownList("TagId", "Select Tag")
     <br>
     <br>    
-    <input type="submit" value="Add new link" class="btn btn-default"/>
+    <input type="submit" value="Add new link" class="btn btn-secondary"/>
 }
-<p>@Html.ActionLink("Show all links", "Index")</p>
-<p>@Html.ActionLink("Return Home", "Index", "Home")</p>
+
+<div class="links2">
+  <div class="link">
+    @Html.ActionLink("Show all links", "Index")
+  </div>
+    <div class="link">
+    @Html.ActionLink("Return Home", "Index", "Home")
+  </div>
+</div>
 
 
     @* @foreach (SelectListItem categoryId in @ViewBag.CategoryId)

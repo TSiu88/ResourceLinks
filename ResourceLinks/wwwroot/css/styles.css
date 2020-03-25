@@ -16,6 +16,10 @@ p {
   font-size: 15px;
 }
 
+label {
+  margin: 10px;
+}
+
 .links5 {
   margin-top: 20px;
   font-size: 15px;
