@@ -4,7 +4,10 @@
 
 @model ResourceLinks.Models.Tag
 
-<h4>Add a new tag</h4>
+<div class=jumbotron>
+  <h2>Add a new tag</h2>
+</div>
+
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Name)

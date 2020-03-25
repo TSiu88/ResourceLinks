@@ -4,7 +4,9 @@
 
 @model ResourceLinks.Models.Category
 
-<h4>Add a new category</h4>
+<div class=jumbotron>
+  <h2>Add a new category</h2>
+</div>
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Title)

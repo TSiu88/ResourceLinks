@@ -4,7 +4,10 @@
 
 @model ResourceLinks.Models.Link
 
-<h2>Link Details for @Html.DisplayFor(model => model.ResourceName)</h2>
+<div class=jumbotron>
+  <h2>Link Details for @Html.DisplayFor(model => model.ResourceName)</h2>
+</div>
+
 <hr />
 <h3>URL: @Html.DisplayFor(model => model.LinkUrl)</h3>
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>

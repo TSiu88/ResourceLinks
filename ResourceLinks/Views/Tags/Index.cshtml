@@ -5,7 +5,9 @@
 @using ResourceLinks.Models;
 @model List<ResourceLinks.Models.Tag>;
 
-<h1>Tags</h1>
+<div class=jumbotron>
+  <h1>Tags</h1>
+</div>
 
 @if (@Model.Count == 0)
 {
@@ -15,7 +17,7 @@
 <ul>
   @foreach (Tag tag in Model)
   {
-    <li>@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</li>
+    <h3>@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</h3>
     <p>
       @Html.ActionLink("Edit", "Edit", new { id = tag.TagId}) | 
       @Html.ActionLink("Delete", "Delete", new { id = tag.TagId})
@@ -23,5 +25,11 @@
   }
 </ul>
 
-<p>@Html.ActionLink("Add new tag", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<div class="links2">
+  <div class="link">
+    @Html.ActionLink("Add new tag", "Create")
+  </div>
+  <div class="link">
+    @Html.ActionLink("Home", "Index", "Home")
+  </div>
+</div>

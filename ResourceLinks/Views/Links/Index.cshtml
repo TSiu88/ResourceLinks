@@ -5,7 +5,9 @@
 @using ResourceLinks.Models;
 @model List<ResourceLinks.Models.Link>;
 
-<h1>Links</h1>
+<div class=jumbotron>
+  <h1>Links</h1>
+</div>
 
 @if (@Model.Count == 0)
 {
@@ -15,7 +17,7 @@
 <ul>
   @foreach (Link link in Model)
   {
-    <li>@Html.ActionLink($"{link.ResourceName}", "Details", new { id = link.LinkId })</li>
+    <h3>@Html.ActionLink($"{link.ResourceName}", "Details", new { id = link.LinkId })</h3>
     <p>
       @Html.ActionLink("Delete", "Delete", new { id = link.LinkId }) | 
       @Html.ActionLink("Edit link", "Edit", new { id = link.LinkId })
@@ -23,5 +25,11 @@
   }
 </ul>
 
-<p>@Html.ActionLink("Add new link", "Create")</p>
-<p>@Html.ActionLink("Return Home", "Index", "Home")</p>
+<div class="links2">
+  <div class="link">
+    @Html.ActionLink("Add new link", "Create")
+  </div>
+  <div class="link">
+    @Html.ActionLink("Return Home", "Index", "Home")
+  </div>
+</div>

@@ -1,5 +1,9 @@
-div#footer {
-  position:fixed;
+.container {
+  padding-bottom: 50px;
+}
+
+.footer {
+  /* position:fixed; */
   bottom:0px;
   left:0px;
   width:100%;
@@ -14,24 +18,28 @@ p {
 
 .links4 {
   margin-top: 20px;
+  font-size: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .links3 {
   margin-top: 20px;
+  font-size: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 .links2 {
   margin-top: 20px;
+  font-size: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .link {
   font-size: 20px;
+  font-size: 15px;
   padding-top: 10px;
   text-align: center;
 }
