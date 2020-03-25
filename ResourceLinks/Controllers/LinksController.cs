@@ -60,25 +60,12 @@ namespace ResourceLinks.Controllers
     public ActionResult Edit(int id)
     {
       var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
-      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
       return View(thisLink);
     }
 
     [HttpPost]
     public ActionResult Edit(Link link, int CategoryId, int TagId)
     {
-      // List<int> category = _db.CategoryLink.Select(CategoryId).ToList();
-      if (CategoryId != 0) 
-      // && _db.CategoryLink.Find(CategoryId, link.LinkId) != null)
-      {
-        _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
-      }
-      if (TagId != 0)
-      //  && _db.LinkTag.Find(TagId, link.LinkId) != null)
-      {
-        _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
-      }
       _db.Entry(link).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Details", new {id = link.LinkId});
@@ -103,25 +90,13 @@ namespace ResourceLinks.Controllers
     {
       Link thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
       List<Category> selectedCategories =  _db.Categories.ToList();
-      var LinkCategories = _db.CategoryLink.Where(c => c.LinkId == id).ToList();
-      foreach(CategoryLink element in LinkCategories)
+      var linkCategories = _db.CategoryLink.Where(c => c.LinkId == id).ToList();
+      foreach(CategoryLink element in linkCategories)
       {
         Category thisCategory = _db.Categories.Find(element.CategoryId);
         selectedCategories.Remove(thisCategory);
       }
       ViewBag.CategoryId = new SelectList(selectedCategories, "CategoryId", "Title");
-
-      // foreach (Category category in _db.Categories.ToList())
-      // {
-      //   if (thisLink.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId) != null)
-      //   {
-      //     selectedCategories.Remove(category);
-      //   }
-      // }
-      
-      // ViewBag.CategoryId = new SelectList(selectedCategories, "CategoryId", "Title");
-
-      //ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
       return View(thisLink);
     }
 
@@ -135,8 +110,15 @@ namespace ResourceLinks.Controllers
 
     public ActionResult AddTag(int id)
     {
-      var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+      Link thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
+      List<Tag> selectedTags =  _db.Tags.ToList();
+      var linkTags = _db.LinkTag.Where(c => c.LinkId == id).ToList();
+      foreach(LinkTag element in linkTags)
+      {
+        Tag thisTag = _db.Tags.Find(element.TagId);
+        selectedTags.Remove(thisTag);
+      }
+      ViewBag.TagId = new SelectList(selectedTags, "TagId", "Name");
       return View(thisLink);
     }
 

@@ -26,14 +26,6 @@
     @Html.TextAreaFor(model => model.Description)
     <br>
     <br>
-    @Html.Label("Select category")
-    @Html.DropDownList("CategoryId", "Select Category")
-    <br>
-    <br>
-    @Html.Label("Select tag")
-    @Html.DropDownList("TagId", "Select Tag")
-    <br>
-    <br>
     <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

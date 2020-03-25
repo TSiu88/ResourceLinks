@@ -17,6 +17,7 @@
     @Html.DropDownList("CategoryId")
 
     <input type="submit" value="Save" />
+    <p>@Html.ActionLink("Cancel", "Details", new {id = Model.LinkId})</p>
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>

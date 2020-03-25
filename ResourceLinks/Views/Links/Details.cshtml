@@ -8,8 +8,8 @@
   <h2>Link Details for @Html.DisplayFor(model => model.ResourceName)</h2>
 </div>
 
-<hr />
-<h3>URL: @Html.DisplayFor(model => model.LinkUrl)</h3>
+<hr/>
+<h3>URL: <a href="http://@Model.LinkUrl">@Model.ResourceName</a></h3>
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>
 
 @if(@Model.Categories.Count == 0)
@@ -31,6 +31,7 @@ else
   }
   </ul>
 }
+
 
 @if(@Model.Tags.Count == 0)
 {
