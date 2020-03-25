@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ResourceLinks.Models.Link
+<div class=jumbotron>
+  <h2>Add a new tag to link</h2>
+</div>
+
+<h4>Add a tag to this resource: @Html.DisplayFor(model => model.ResourceName)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.LinkId)
+
+    @Html.Label("Select tag")
+    @Html.DropDownList("TagId")
+
+    <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

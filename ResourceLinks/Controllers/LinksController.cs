@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace ResourceLinks.Controllers
 {
@@ -67,6 +68,7 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult Edit(Link link, int CategoryId, int TagId)
     {
+      // List<int> category = _db.CategoryLink.Select(CategoryId).ToList();
       if (CategoryId != 0) 
       // && _db.CategoryLink.Find(CategoryId, link.LinkId) != null)
       {
@@ -99,21 +101,68 @@ namespace ResourceLinks.Controllers
 
     public ActionResult AddCategory(int id)
     {
-      var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
+      Link thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
+      // var LinkCategories = _db.CategoryLink.Where(c => c.LinkId == id).ToList();
+      // foreach(CategoryLink element in LinkCategories)
+      // {
+      //   Category thisCategory = _db.Categories.Find(element.CategoryId);
+      //   allCategories.Remove(thisCategory);
+      // }
+      // ViewBag.CategoryId = new SelectList(allCategories, "CategoryId", "Title");
+      
+      List<Category> selectedCategories =  _db.Categories.ToList();
+
+      foreach (Category category in _db.Categories.ToList())
+      {
+        if (thisLink.Categories.FirstOrDefault(c => c.CategoryId == category.CategoryId) != null)
+        {
+          selectedCategories.Remove(category);
+        }
+      }
+      
+      ViewBag.CategoryId = new SelectList(selectedCategories, "CategoryId", "Title");
+
+      //ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
       return View(thisLink);
     }
 
     [HttpPost]
     public ActionResult AddCategory(Link link, int CategoryId)
     {
-      if (CategoryId != 0)
+      if (_db.Categories.FirstOrDefault(c => c.Title == _db.Categories.Find(CategoryId).Title) != null)
+      {
+        TempData ["message"] = "Category already exists!";
+        return RedirectToAction("AddCategory");
+      }
+      else
       {
         _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
+        _db.SaveChanges();
+        return RedirectToAction("Details", new {id = link.LinkId});
+      }
+      // if (CategoryId != 0)
+      // {
+
+      // }
+    }
+
+    public ActionResult AddTag(int id)
+    {
+      var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
+      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+      return View(thisLink);
+    }
+
+    [HttpPost]
+    public ActionResult AddTag(Link link, int TagId)
+    {
+      if (TagId != 0)
+      {
+        _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
       }
       _db.SaveChanges();
       return RedirectToAction("Details", new {id = link.LinkId});
-    }
+    }    
 
     [HttpPost]
     public ActionResult DeleteCategory(int joinId)

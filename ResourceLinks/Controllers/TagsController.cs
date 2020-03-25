@@ -33,30 +33,22 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult Create(Tag tag)
     {
-      List<Tag> thisTags = _db.Tags.ToList();
-      int index = 0;
-      foreach (Tag element in  thisTags)
-      {
-        if (element.Name != tag.Name && tag.Name != null)
-        {
-          index++;
-        }
-        if (index == thisTags.Count)
-        {
-          _db.Tags.Add(tag);
-          _db.SaveChanges();
-          return RedirectToAction("Index"); 
-        }
-      }
       if (tag.Name == null)
       {
         TempData ["message"] = "Tag Name is empty!";
+        return Create();
+      }
+      else if (_db.Tags.FirstOrDefault(t => t.Name.ToLower() == tag.Name.ToLower()) != null)
+      {
+        TempData ["message"] = "Tag already exists!";
+        return Create();
       }
       else
       {
-        TempData ["message"] = "Tag already exists!";
+        _db.Tags.Add(tag);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
       }
-      return Create();
     }
 
     public ActionResult Details(int id)
@@ -70,6 +62,11 @@ namespace ResourceLinks.Controllers
 
     public ActionResult Edit(int id)
     {
+      if(TempData["message"] != null)
+      {
+        ViewBag.Message = TempData["message"].ToString();
+        TempData["message"] = null;
+      }
       var thisTag = _db.Tags.FirstOrDefault(tag => tag.TagId == id);
       return View(thisTag);
     }
@@ -77,9 +74,26 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult Edit(Tag tag)
     {
-      _db.Entry(tag).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if (tag.Name == null)
+      {
+        TempData ["message"] = "Tag Name is empty!";
+        return RedirectToAction("Edit");
+      }
+      else if (tag.Name == _db.Tags.Find(tag.TagId).Name)
+      {
+        return RedirectToAction("Index");
+      }
+      else if (_db.Tags.FirstOrDefault(t => t.Name.ToLower() == tag.Name.ToLower()) != null)
+      {
+        TempData ["message"] = "Tag already exists!";
+        return Create();
+      }
+      else
+      {
+        _db.Entry(tag).State = EntityState.Modified;
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Delete(int id)

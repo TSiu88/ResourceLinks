@@ -33,30 +33,22 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult Create(Category category)
     { 
-      List<Category> thisCategories = _db.Categories.ToList();
-      int index = 0;
-      foreach (Category element in  thisCategories)
-      {
-        if (element.Title != category.Title && category.Title != null)
-        {
-          index++;
-        }
-        if (index == thisCategories.Count)
-        {
-          _db.Categories.Add(category);
-          _db.SaveChanges();
-          return RedirectToAction("Index");
-        }
-      }
       if (category.Title == null)
       {
         TempData ["message"] = "Category Title is empty!";
+        return Create();
+      }
+      else if (_db.Categories.FirstOrDefault(c => c.Title.ToLower() == category.Title.ToLower()) != null)
+      {
+        TempData ["message"] = "Category already exists!";
+        return Create();
       }
       else
       {
-        TempData ["message"] = "Category already exists!";
+        _db.Categories.Add(category);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
       }
-      return Create();
     }
 
     public ActionResult Details(int id)
@@ -70,6 +62,11 @@ namespace ResourceLinks.Controllers
 
     public ActionResult Edit(int id)
     {
+      if(TempData["message"] != null)
+      {
+        ViewBag.Message = TempData["message"].ToString();
+        TempData["message"] = null;
+      }
       var thisCategory = _db.Categories.FirstOrDefault(category => category.CategoryId == id);
       return View(thisCategory);
     }
@@ -77,9 +74,26 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult Edit(Category category)
     {
-      _db.Entry(category).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if (category.Title == null)
+      {
+        TempData ["message"] = "Category Title is empty!";
+        return RedirectToAction("Edit");
+      }
+      else if (category.Title == _db.Categories.Find(category.CategoryId).Title)
+      {
+        return RedirectToAction("Index");
+      }
+      else if (_db.Categories.FirstOrDefault(c => c.Title.ToLower() == category.Title.ToLower()) != null)
+      {
+        TempData ["message"] = "Category already exists!";
+        return RedirectToAction("Edit");
+      }
+      else
+      {
+        _db.Entry(category).State = EntityState.Modified;
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
 
     public ActionResult Delete(int id)
