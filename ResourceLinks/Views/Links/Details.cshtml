@@ -4,14 +4,14 @@
 
 @model ResourceLinks.Models.Link
 
-<h2>Item Details for @Html.DisplayFor(model => model.ResourceName)</h2>
+<h2>Link Details for @Html.DisplayFor(model => model.ResourceName)</h2>
 <hr />
 <h3>URL: @Html.DisplayFor(model => model.LinkUrl)</h3>
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>
 
 @if(@Model.Categories.Count == 0)
 {
-  <p>This item does not belong to any categories</p>
+  <p>This link does not belong to any categories</p>
 }
 else
 {

@@ -42,6 +42,17 @@
 #### Notes
 Be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation where sharing a large amount of resource links.  This application will consolidate links to be viewable in one place and organized by category.
 
+### TO-DO
+- Add "Add a tag" view and controller methods, edit the edit links
+- Prevent adding duplicate categories/tags
+- Make URL a link?
+- Check that all objects working properly
+- Add authorization to edit entries
+- Create link entries w/ multiple tags/categories from checkboxes
+- Style site
+- Sort lists
+- Have list of categories/tags already have when adding a new category/tag
+
 Class Category, Class link, Class tag
 - categorylink, linktag
 - links have multiple categories

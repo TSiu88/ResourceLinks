@@ -67,17 +67,19 @@ namespace ResourceLinks.Controllers
     [HttpPost]
     public ActionResult Edit(Link link, int CategoryId, int TagId)
     {
-      if (CategoryId != 0 && _db.CategoryLink.Find(CategoryId) != null)
+      if (CategoryId != 0) 
+      // && _db.CategoryLink.Find(CategoryId, link.LinkId) != null)
       {
         _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
       }
-      if (TagId != 0 && _db.LinkTag.Find(TagId) != null)
+      if (TagId != 0)
+      //  && _db.LinkTag.Find(TagId, link.LinkId) != null)
       {
         _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
       }
       _db.Entry(link).State = EntityState.Modified;
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = link.LinkId});
     }
 
     public ActionResult Delete(int id)
@@ -98,20 +100,19 @@ namespace ResourceLinks.Controllers
     public ActionResult AddCategory(int id)
     {
       var thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Title");
       return View(thisLink);
     }
 
     [HttpPost]
-    public ActionResult AddCategory(Link link, int CategoryId, int TagId)
+    public ActionResult AddCategory(Link link, int CategoryId)
     {
       if (CategoryId != 0)
       {
-      _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
-      _db.LinkTag.Add(new LinkTag() { TagId = TagId, LinkId = link.LinkId });
+        _db.CategoryLink.Add(new CategoryLink() { CategoryId = CategoryId, LinkId = link.LinkId });
       }
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = link.LinkId});
     }
 
     [HttpPost]
@@ -120,7 +121,16 @@ namespace ResourceLinks.Controllers
       var joinEntry = _db.CategoryLink.FirstOrDefault(entry => entry.CategoryLinkId == joinId);
       _db.CategoryLink.Remove(joinEntry);
       _db.SaveChanges();
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = joinEntry.LinkId});
+    }
+
+    [HttpPost]
+    public ActionResult DeleteTag(int joinId)
+    {
+      var joinEntry = _db.LinkTag.FirstOrDefault(entry => entry.LinkTagId == joinId);
+      _db.LinkTag.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = joinEntry.LinkId});
     }
   }
 }

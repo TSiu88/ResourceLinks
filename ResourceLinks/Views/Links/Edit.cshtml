@@ -5,9 +5,9 @@
 @model ResourceLinks.Models.Link
 
 
-<h2>Edit</h2>
+<h2>Edit This Link</h2>
 
-<h4>Edit this link: @Html.DisplayFor(model => model.ResourceName)</h4>
+<h4>Edit link for: @Html.DisplayFor(model => model.ResourceName)</h4>
 
 @using (Html.BeginForm())
 {
@@ -15,16 +15,24 @@
 
     @Html.LabelFor(model => model.ResourceName)
     @Html.EditorFor(model => model.ResourceName)
-
+    <br>
+    <br>
+    @Html.LabelFor(model => model.LinkUrl)
+    @Html.EditorFor(model => model.LinkUrl)
+    <br>
+    <br>
     @Html.LabelFor(model => model.Description)
-    @Html.EditorFor(model => model.Description)
-
+    @Html.TextAreaFor(model => model.Description)
+    <br>
+    <br>
     @Html.Label("Select category")
-    @Html.DropDownList("CategoryId")
-
+    @Html.DropDownList("CategoryId", "Select Category")
+    <br>
+    <br>
     @Html.Label("Select tag")
     @Html.DropDownList("TagId", "Select Tag")
-
+    <br>
+    <br>
     <input type="submit" value="Save" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
