@@ -22,15 +22,41 @@ namespace ResourceLinks.Controllers
 
     public ActionResult Create()
     {
+      if(TempData["message"] != null)
+      {
+        ViewBag.Message = TempData["message"].ToString();
+        TempData["message"] = null;
+      }
       return View();
     }
     
     [HttpPost]
     public ActionResult Create(Category category)
-    {
-      _db.Categories.Add(category);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+    { 
+      List<Category> thisCategories = _db.Categories.ToList();
+      int index = 0;
+      foreach (Category element in  thisCategories)
+      {
+        if (element.Title != category.Title && category.Title != null)
+        {
+          index++;
+        }
+        if (index == thisCategories.Count)
+        {
+          _db.Categories.Add(category);
+          _db.SaveChanges();
+          return RedirectToAction("Index");
+        }
+      }
+      if (category.Title == null)
+      {
+        TempData ["message"] = "Category Title is empty!";
+      }
+      else
+      {
+        TempData ["message"] = "Category already exists!";
+      }
+      return Create();
     }
 
     public ActionResult Details(int id)

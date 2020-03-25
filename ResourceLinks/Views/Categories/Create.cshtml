@@ -12,5 +12,6 @@
     @Html.LabelFor(model => model.Title)
     @Html.TextBoxFor(model => model.Title)
     <input type="submit" value="Add new category" />
+    <p>@ViewBag.message</p>
 }
 <p>@Html.ActionLink("Back to categories list", "Index")</p>

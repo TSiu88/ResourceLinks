@@ -51,7 +51,7 @@ Be able to add and share resources that are important for the current situation 
 - Create link entries w/ multiple tags/categories from checkboxes
 - Style site
 - Sort lists
-- Have list of categories/tags already have when adding a new category/tag
+- Have list of categories/tags already have when editing/adding a new category/tag to a link
 
 Class Category, Class link, Class tag
 - categorylink, linktag

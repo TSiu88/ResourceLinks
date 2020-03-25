@@ -22,15 +22,41 @@ namespace ResourceLinks.Controllers
 
     public ActionResult Create()
     {
+      if(TempData["message"] != null)
+      {
+        ViewBag.Message = TempData["message"].ToString();
+        TempData["message"] = null;
+      }
       return View();
     }
     
     [HttpPost]
     public ActionResult Create(Tag tag)
     {
-      _db.Tags.Add(tag);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      List<Tag> thisTags = _db.Tags.ToList();
+      int index = 0;
+      foreach (Tag element in  thisTags)
+      {
+        if (element.Name != tag.Name && tag.Name != null)
+        {
+          index++;
+        }
+        if (index == thisTags.Count)
+        {
+          _db.Tags.Add(tag);
+          _db.SaveChanges();
+          return RedirectToAction("Index"); 
+        }
+      }
+      if (tag.Name == null)
+      {
+        TempData ["message"] = "Tag Name is empty!";
+      }
+      else
+      {
+        TempData ["message"] = "Tag already exists!";
+      }
+      return Create();
     }
 
     public ActionResult Details(int id)

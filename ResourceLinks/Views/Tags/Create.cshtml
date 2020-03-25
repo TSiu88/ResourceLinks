@@ -13,5 +13,6 @@
     @Html.LabelFor(model => model.Name)
     @Html.TextBoxFor(model => model.Name)
     <input type="submit" value="Add new tag" />
+    <p>@ViewBag.message</p>
 }
 <p>@Html.ActionLink("Back to tags list", "Index")</p>
