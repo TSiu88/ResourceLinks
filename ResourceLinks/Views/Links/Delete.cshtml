@@ -9,8 +9,9 @@
 </div>
 
 
-@Html.DisplayNameFor(model => model.ResourceName): @Html.DisplayFor(model => model.ResourceName)
-@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)
+<h4>@Html.DisplayNameFor(model => model.ResourceName): @Html.DisplayFor(model => model.ResourceName)</h4>
+<h4>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h4>
+
 @using (Html.BeginForm())
 {
     <input type="submit" value="Delete" />

@@ -94,10 +94,10 @@ namespace ResourceLinks.Controllers
         TempData ["message"] = "Category Title is empty!";
         return RedirectToAction("Edit");
       }
-      else if (category.Title == _db.Categories.Find(category.CategoryId).Title)
-      {
-        return RedirectToAction("Index");
-      }
+      // else if (category.Title == _db.Categories.Find(category.CategoryId).Title)
+      // {
+      //   return RedirectToAction("Index");
+      // }
       else if (_db.Categories.FirstOrDefault(c => c.Title.ToLower() == category.Title.ToLower()) != null)
       {
         TempData ["message"] = "Category already exists!";

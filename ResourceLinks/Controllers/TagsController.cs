@@ -17,7 +17,7 @@ namespace ResourceLinks.Controllers
     private readonly ResourceLinksContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public TagsController(ResourceLinksContext db)
+    public TagsController(UserManager<ApplicationUser> userManager,ResourceLinksContext db)
     {
        _userManager = userManager;
       _db = db;
@@ -93,10 +93,10 @@ namespace ResourceLinks.Controllers
         TempData ["message"] = "Tag Name is empty!";
         return RedirectToAction("Edit");
       }
-      else if (tag.Name == _db.Tags.Find(tag.TagId).Name)
-      {
-        return RedirectToAction("Index");
-      }
+      // else if (tag.Name == _db.Tags.Find(tag.TagId).Name)
+      // {
+      //   return RedirectToAction("Index");
+      // }
       else if (_db.Tags.FirstOrDefault(t => t.Name.ToLower() == tag.Name.ToLower()) != null)
       {
         TempData ["message"] = "Tag already exists!";

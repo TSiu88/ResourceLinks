@@ -4,9 +4,7 @@
 
 #### By _**Tiffany Siu and Andriy Veremyeyev**_
 
-<!-- [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) -->
-<!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 ![LastCommit](https://img.shields.io/github/last-commit/tsiu88/ResourceLinks)
 ![Languages](https://img.shields.io/github/languages/top/tsiu88/ResourceLinks)
 [![MIT license](https://img.shields.io/badge/License-MIT-orange.svg)](https://lbesson.mit-license.org/)
@@ -28,6 +26,15 @@
 ---
 ## Description
 
+#### 3/25/20 Work from Home Summary
+- Resource Links
+  - Fix functionality which was not working properly
+  - Add messages for duplicate categories/tags or prevent ability to add duplicates
+  - Add authorization to edit but ability to view without login
+- Struggles:
+  - Showing error message for duplicate on same view without creating a new view
+  - Editing existing category/tag into a duplicate of another existing category/tag
+
 #### 3/24/20 Work from Home Summary
 - University Registrar
   - Add password authorization
@@ -43,7 +50,6 @@
 Be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation where sharing a large amount of resource links.  This application will consolidate links to be viewable in one place and organized by category.
 
 ### TO-DO
-- Add authorization to edit entries
 - Create link entries w/ multiple tags/categories from checkboxes
 - Style site
 - Sort lists
