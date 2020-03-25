@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResourceLinks.Models;
 
 namespace ResourceLinks.Migrations
 {
     [DbContext(typeof(ResourceLinksContext))]
-    partial class ResourceLinksContextModelSnapshot : ModelSnapshot
+    [Migration("20200325221116_addIdentity")]
+    partial class addIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,11 +183,7 @@ namespace ResourceLinks.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("CategoryId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Categories");
                 });
@@ -219,11 +217,7 @@ namespace ResourceLinks.Migrations
 
                     b.Property<string>("ResourceName");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("LinkId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Links");
                 });
@@ -253,11 +247,7 @@ namespace ResourceLinks.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("TagId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Tags");
                 });
@@ -307,13 +297,6 @@ namespace ResourceLinks.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ResourceLinks.Models.Category", b =>
-                {
-                    b.HasOne("ResourceLinks.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("ResourceLinks.Models.CategoryLink", b =>
                 {
                     b.HasOne("ResourceLinks.Models.Category", "Category")
@@ -327,13 +310,6 @@ namespace ResourceLinks.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ResourceLinks.Models.Link", b =>
-                {
-                    b.HasOne("ResourceLinks.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("ResourceLinks.Models.LinkTag", b =>
                 {
                     b.HasOne("ResourceLinks.Models.Link", "Link")
@@ -345,13 +321,6 @@ namespace ResourceLinks.Migrations
                         .WithMany("Links")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ResourceLinks.Models.Tag", b =>
-                {
-                    b.HasOne("ResourceLinks.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

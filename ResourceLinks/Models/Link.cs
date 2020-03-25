@@ -15,5 +15,6 @@ namespace ResourceLinks.Models
     public string Description { get; set; }
     public ICollection<CategoryLink> Categories { get; }
     public ICollection<LinkTag> Tags { get; }
+    public virtual ApplicationUser User { get; set; }
   }
 }

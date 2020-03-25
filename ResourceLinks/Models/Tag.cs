@@ -12,6 +12,7 @@ namespace ResourceLinks.Models
     public int TagId { get; set; }
     public string Name { get; set; }
     public virtual ICollection<LinkTag> Links { get; set; }
+    public virtual ApplicationUser User { get; set; }
 
   }
 }

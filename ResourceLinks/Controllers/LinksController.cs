@@ -5,15 +5,22 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ResourceLinks.Controllers
 {
+  
   public class LinksController : Controller
   {
     private readonly ResourceLinksContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public LinksController(ResourceLinksContext db)
+    public LinksController(UserManager<ApplicationUser> userManager, ResourceLinksContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -21,6 +28,19 @@ namespace ResourceLinks.Controllers
     {
       return View(_db.Links.ToList());
     }
+
+    public ActionResult Details(int id)
+    {
+      var thisLink = _db.Links
+        .Include(link => link.Categories)
+        .ThenInclude(join => join.Category)
+        .Include(link => link.Tags)
+        .ThenInclude(join => join.Tag)
+        .FirstOrDefault(link => link.LinkId == id);
+      return View(thisLink);
+    }
+
+    [Authorize]
 
     public ActionResult Create()
     {
@@ -30,8 +50,11 @@ namespace ResourceLinks.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Link link, int CategoryId, int TagId)
-    {
+    public async Task<ActionResult> Create(Link link, int CategoryId, int TagId)
+    { 
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      link.User = currentUser;
       _db.Links.Add(link);
       if (CategoryId != 0)
       {
@@ -44,17 +67,6 @@ namespace ResourceLinks.Controllers
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
-    }
-
-    public ActionResult Details(int id)
-    {
-      var thisLink = _db.Links
-        .Include(link => link.Categories)
-        .ThenInclude(join => join.Category)
-        .Include(link => link.Tags)
-        .ThenInclude(join => join.Tag)
-        .FirstOrDefault(link => link.LinkId == id);
-      return View(thisLink);
     }
 
     public ActionResult Edit(int id)

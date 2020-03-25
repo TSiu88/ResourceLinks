@@ -1,15 +1,16 @@
 @{
   Layout = "_Layout";
 }
-
+<div class ="homepage">
 <div class="jumbotron">
   <h1>Welcome to the Resource Links!</h1>
 </div>
-
-<img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" class="img-fluid">
+</div>
+@* <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" class="img-fluid"> *@
 @* <img src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/unfurl-slack-resources-en@2x.jpg" class="img-fluid"> *@
 
-<div class="links4 footer">
+
+<div class="footer">
   <div class="link">
     <p>@Html.ActionLink("See all categories", "Index", "Categories")</p>
   </div>
@@ -20,6 +21,6 @@
     <p>@Html.ActionLink("See all links", "Index", "Links")</p>
   </div>
   <div class="link">
-    <p>@Html.ActionLink("Add new link", "Create", "Links")</p>
+    <p>@Html.ActionLink("Create an account", "Index", "Account")</p>
   </div>
 </div>

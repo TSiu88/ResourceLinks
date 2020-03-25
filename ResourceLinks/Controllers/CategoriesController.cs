@@ -3,15 +3,23 @@ using Microsoft.AspNetCore.Mvc;
 using ResourceLinks.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ResourceLinks.Controllers
 {
   public class CategoriesController : Controller
   {
     private readonly ResourceLinksContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public CategoriesController(ResourceLinksContext db)
+
+    public CategoriesController(UserManager<ApplicationUser> userManager,ResourceLinksContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -19,6 +27,17 @@ namespace ResourceLinks.Controllers
     {
       return View(_db.Categories.ToList());
     }
+
+    public ActionResult Details(int id)
+    {
+      var thisCategory = _db.Categories
+        .Include(category => category.Links)
+        .ThenInclude(join => join.Link)
+        .FirstOrDefault(category => category.CategoryId == id);
+      return View(thisCategory);
+    }
+
+    [Authorize]
 
     public ActionResult Create()
     {
@@ -51,14 +70,7 @@ namespace ResourceLinks.Controllers
       }
     }
 
-    public ActionResult Details(int id)
-    {
-      var thisCategory = _db.Categories
-        .Include(category => category.Links)
-        .ThenInclude(join => join.Link)
-        .FirstOrDefault(category => category.CategoryId == id);
-      return View(thisCategory);
-    }
+
 
     public ActionResult Edit(int id)
     {

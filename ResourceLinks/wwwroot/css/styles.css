@@ -2,6 +2,20 @@
   padding-bottom: 50px;
 }
 
+.homepage {
+  background: url("../img/library.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 60px;
+  min-height: 60vh;
+  border: 2px solid black;
+  /* background: rgb(204, 204, 204);
+  background: rgba(204, 204, 204, 0.7); */
+  margin-bottom: 60px;
+}
+
 .footer {
   /* position:fixed; */
   bottom:0px;
@@ -10,6 +24,10 @@
   color:#CCC;
   background:#333;
   padding:8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 p {

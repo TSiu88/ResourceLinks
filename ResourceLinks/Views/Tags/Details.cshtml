@@ -25,7 +25,8 @@ else
   }
   </ul>
 }
-
-<p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
-<p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>
-<p>@Html.ActionLink("Back to tags", "Index")</p>
+<div class="footer">
+  <p>@Html.ActionLink("Edit Tag", "Edit", new { id = Model.TagId })</p>
+  <p>@Html.ActionLink("Delete Tag", "Delete", new { id = Model.TagId })</p>
+  <p>@Html.ActionLink("Back to tags", "Index")</p>  
+</div>
