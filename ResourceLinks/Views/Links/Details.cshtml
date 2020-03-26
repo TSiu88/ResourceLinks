@@ -22,7 +22,8 @@ else
   <ul>
   @foreach(var join in Model.Categories)
   {
-    <li>@join.Category.Title</li>
+    <li>@Html.ActionLink(@join.Category.Title, "Details", "Categories", new {id = join.CategoryId})</li>
+    
     @if(User.Identity.IsAuthenticated)
     {
       @using (Html.BeginForm("DeleteCategory", "Links"))
@@ -46,7 +47,8 @@ else
   <ul>
   @foreach(var join in Model.Tags)
   {
-    <li>@join.Tag.Name</li>
+    <li>@Html.ActionLink(@join.Tag.Name, "Details", "Tags", new {id = join.TagId})</li>
+    
     @if(User.Identity.IsAuthenticated)
     {
       @using (Html.BeginForm("DeleteTag", "Links"))

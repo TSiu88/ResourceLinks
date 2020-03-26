@@ -51,6 +51,8 @@ This application allows someone to be able to add and share resources that are i
 
 ##### Parking Lot
 - Create link entries w/ multiple tags/categories from checkboxes
+- View link list by category or by tag
+- Search 
  -->
 
 ## Setup/Installation Requirements

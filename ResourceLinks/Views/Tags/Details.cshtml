@@ -21,7 +21,8 @@ else
   <ul>
   @foreach(var join in Model.Links)
   {
-    <li>@join.Link.ResourceName</li>
+    <li>@Html.ActionLink(@join.Link.ResourceName, "Details", "Links", new {id = join.LinkId})</li>
+    
   }
   </ul>
 }
