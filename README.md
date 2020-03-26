@@ -25,6 +25,7 @@
 9. [License](#license)
 ---
 ## Description
+This application allows someone to be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation where sharing a large amount of resource links.  This application will consolidate links to be viewable in one place and allows adding categories or tags to the links.  Links are visible for everyone but can only be added, edited, or deleted with a login.
 
 #### 3/25/20 Work from Home Summary
 - Resource Links
@@ -46,67 +47,11 @@
   - Many-to-many relationships creating multiple relationship with checkboxes
   - Checkboxes being enabled and interactable with HTML helpers and passing it into the controller
 
-#### Notes
-Be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation where sharing a large amount of resource links.  This application will consolidate links to be viewable in one place and organized by category.
+<!-- #### Notes
 
-### TO-DO
+##### Parking Lot
 - Create link entries w/ multiple tags/categories from checkboxes
-- Style site
-- Sort lists
-
-Class Category, Class link, Class tag
-- categorylink, linktag
-- links have multiple categories
-- links have multiple tags
-- categories and tags not connected
-
-Login authorization
-- log in to be able to edit, add, delete links
-- without login can view pages but not edit
-
-Class Category
-- id
-- title
-
-Class Tag
-- id
-- name
-
-Class link
--id
--resource name
--link URL
--description (optional)
-
-
-Hardcode
-
-Class Category
-- Volunteering
-- Education
-- Entertainment
-- General
-- Health
-- Food
-- Unemployment
-
-Class Tag
-- Local
-- National
-- Time sensitive
-- Limited time
-- Global
-- Statistics?
-- Data/Research?
-
-Extra Methods
-- Search
-- Sort
-
-Possibility to create link with several categoies and tags.
-
-_README under construction_
-<!-- _Detailed desc w/ purpose/usage, what does, motivation to create, why exists, other info for users/developers to have_ -->
+ -->
 
 ## Setup/Installation Requirements
 
@@ -145,34 +90,49 @@ _This program also makes use of SQL databases. We recommend using MySQL Workbenc
 * _Markdown_
 
 ## Notable Features
-<!-- _features that make project stand out_ -->
+This application only allows editing for users that have registered and logged in, but is visible to everyone else.  Checks for duplications of categories and tags are done and messages are shown if there is a duplicate.
 
 ## Specifications
 
-<!-- * _List of features the program should do, from simplest to more complex, handling all possible cases.  Can do as text or put in table, with example input and output_
-  * _Example Input: expected input_
-  * _Example Output: expected output_
- -->
+<details>
+  <summary>Click to expand to view specifications</summary>
+
+| Specification | Input | Output |
+| :-------------     | :------------- | :------------- |
+| The application should have categories and tags that can be added to a link | Open link to categories or tags | Show list of categories or tags
+| Categories and tags can be added, edited or deleted if logged in | On category/tag index | Buttons to add, edit, or delete |
+| New categories/tags cannot be added if it is a duplicate that already exists | Add category/link | Duplicate categories/tags not allowed |
+| Links can be added with a category and tag | Add a link | Link visible in index of links |
+| Additional categories or tags can be added to a link | Add category/link | New category/link visible in lnk details |
+| Links can have categories/tags deleted | Delete category/tag | Category/tag removed from link |
+| Links can have details edited | Edit link details | New details shown |
+| Ability to add, edit, or delete not visible if not logged in | User not logged in | No buttons/links to add, edit, or delete visible |
+</details>
 
 ## User Stories
 
-<!-- * As a scheduler, I want to be able to organize nurses vacation schedules without much paperwork so that I can be more efficient.
-* As a scheduler, I want to see a list of requests with the overlapping dates and the nurses that sent in the requests organized by priority so I can see which staff member should have priority in getting the request approved. -->
-
-<!-- * Give stories for people who will use this project and what they'd want it to do.  Can include customers/end users, programmers that maintain code, etc. Use "As a <job title/type of user/etc>, I want to...<what want program to achieve>... so that I can...<reason>.-->
-
+* As a registered user, I want to be able to add resource links to the application so that I can share my resources with others in an organized way.
+* As a registered user, I want to be able to freely add, edit, and delete all categories, tags, and details associated with a link so that I can be organized and flexible in what is shown.
+* As the application owner, I want only registered users to be able to edit the information so that information on the application is only changable by authorized people.
+* As a viewer, I want to be able to see resource links and the categories or tags associated with them so that I can be selective or search for links I am interested in.
 
 ## Screenshots
 
-<!-- _Here is a snippet of what the input looks like:_
+_Here is a snippet of what the homepage looks like:_
 
-![Snippet of input fields](img/snippet1.png)
+![Snippet of homepage](./ResourceLinks/img-readme/snippet1.png)
 
-_Here is a preview of what the output looks like:_
+_Here is a preview of what the links page looks like if logged in:_
 
-![Snippet of output box](img/snippet2.png) -->
+![Snippet of logged in links page](./ResourceLinks/img-readme/snippet2.png)
 
-<!-- _{Show pictures using ![alt text](image.jpg), show what library does as concisely as possible but don't need to explain how project solves problem from `code`_ -->
+_Here is a preview of what the link details looks like if NOT logged in:_
+
+![Snippet of logged out links page](./ResourceLinks/img-readme/snippet3.png)
+
+_Here is a preview of what the link details looks like if logged in:_
+
+![Snippet of logged in links page](./ResourceLinks/img-readme/snippet4.png)
 
 ## Known Bugs
 
@@ -185,5 +145,7 @@ _If there are any question or concerns please contact us at our emails: [Tiffany
 ### License
 
 *This software is licensed under the MIT license*
+
+Photo Credit: Photo by [Iñaki del Olmo on Unsplash](https://unsplash.com/photos/NIJuEQw0RKg)
 
 Copyright (c) 2020 **_Tiffany Siu, Andriy Veremyeyev_**

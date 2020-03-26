@@ -108,7 +108,7 @@ namespace ResourceLinks.Controllers
     public ActionResult AddCategory(int id)
     {
       Link thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      List<Category> selectedCategories =  _db.Categories.ToList();
+      List<Category> selectedCategories =  _db.Categories.OrderBy(x => x.Title).ToList();
       var linkCategories = _db.CategoryLink.Where(c => c.LinkId == id).ToList();
       foreach(CategoryLink element in linkCategories)
       {
@@ -130,7 +130,7 @@ namespace ResourceLinks.Controllers
     public ActionResult AddTag(int id)
     {
       Link thisLink = _db.Links.FirstOrDefault(links => links.LinkId == id);
-      List<Tag> selectedTags =  _db.Tags.ToList();
+      List<Tag> selectedTags =  _db.Tags.OrderBy(x => x.Name).ToList();
       var linkTags = _db.LinkTag.Where(c => c.LinkId == id).ToList();
       foreach(LinkTag element in linkTags)
       {
