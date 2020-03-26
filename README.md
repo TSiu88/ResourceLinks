@@ -25,7 +25,7 @@
 9. [License](#license)
 ---
 ## Description
-This application allows someone to be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation where sharing a large amount of resource links.  This application will consolidate links to be viewable in one place and allows adding categories or tags to the links.  Links are visible for everyone but can only be added, edited, or deleted with a login.
+This application allows someone to be able to add and share resources that are important for the current situation of the Coronavirus Outbreak or any other situation of sharing a large amount of resource links between users.  This application will consolidate resource links to be viewable in one place and allows adding categories or tags to the links.  Links are visible for everyone but can only be added, edited, or deleted with a login.
 
 #### 3/25/20 Work from Home Summary
 - Resource Links
@@ -34,7 +34,7 @@ This application allows someone to be able to add and share resources that are i
   - Add authorization to edit but ability to view without login
 - Struggles:
   - Showing error message for duplicate on same view without creating a new view
-  - Editing existing category/tag into a duplicate of another existing category/tag
+  - Prevent editing an existing category/tag to be a duplicate of another existing category/tag
 
 #### 3/24/20 Work from Home Summary
 - University Registrar
