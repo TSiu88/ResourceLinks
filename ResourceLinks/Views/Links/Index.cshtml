@@ -18,7 +18,7 @@
   @foreach (Link link in Model)
   {
     <h3>@Html.ActionLink($"{link.ResourceName}", "Details", new { id = link.LinkId })</h3>
-    @if(@User.Identity.Name != null)
+    @if(User.Identity.IsAuthenticated)
     {
       <p>
         @Html.ActionLink("Delete", "Delete", new { id = link.LinkId }) | 
@@ -30,7 +30,7 @@
 </ul>
 
 <div class="footer">
-  @if(@User.Identity.Name != null)
+  @if(User.Identity.IsAuthenticated)
   {
     <div class="link">
       @Html.ActionLink("Add new link", "Create")

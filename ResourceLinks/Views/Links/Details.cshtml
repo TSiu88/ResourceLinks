@@ -23,7 +23,7 @@ else
   @foreach(var join in Model.Categories)
   {
     <li>@join.Category.Title</li>
-    @if(@User.Identity.Name != null)
+    @if(User.Identity.IsAuthenticated)
     {
       @using (Html.BeginForm("DeleteCategory", "Links"))
       {
@@ -47,7 +47,7 @@ else
   @foreach(var join in Model.Tags)
   {
     <li>@join.Tag.Name</li>
-    @if(@User.Identity.Name != null)
+    @if(User.Identity.IsAuthenticated)
     {
       @using (Html.BeginForm("DeleteTag", "Links"))
       {
@@ -60,7 +60,7 @@ else
 }
 
 <div class="footer">
-  @if(@User.Identity.Name != null)
+  @if(User.Identity.IsAuthenticated)
   {
     <div class="link">
       @Html.ActionLink("Edit Link", "Edit", new { id = Model.LinkId })

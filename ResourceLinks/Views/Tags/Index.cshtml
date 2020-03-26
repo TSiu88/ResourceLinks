@@ -18,7 +18,7 @@
   @foreach (Tag tag in Model)
   {
     <h3>@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</h3>
-    @if(@User.Identity.Name != null)
+    @if(User.Identity.IsAuthenticated)
     {
       <p>
         @Html.ActionLink("Edit", "Edit", new { id = tag.TagId}) | 
@@ -30,7 +30,7 @@
 </ul>
 
 <div class="footer">
-  @if(@User.Identity.Name != null)
+  @if(User.Identity.IsAuthenticated)
   {
     <div class="link">
       @Html.ActionLink("Add new tag", "Create")

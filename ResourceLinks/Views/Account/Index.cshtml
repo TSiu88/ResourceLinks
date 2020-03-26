@@ -12,14 +12,14 @@
   <p>Hello @User.Identity.Name!  You are now Logged in!</p>
   @using (Html.BeginForm("LogOff", "Account"))
   {
-    <input type="submit" class="btn btn-default" value="Log out" />
+    <input type="submit" class="btn btn-secondary" value="Log out" />
   }
-  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  <p>@Html.ActionLink("Return Home", "Index", "Home")</p>
 
 }
 else
 {
   <p>@Html.ActionLink("Register", "Register")</p>
   <p>@Html.ActionLink("Log in", "Login")</p>
-  <p>@Html.ActionLink("Home", "Index", "Home")</p>
+  <p>@Html.ActionLink("Return Home", "Index", "Home")</p>
 }

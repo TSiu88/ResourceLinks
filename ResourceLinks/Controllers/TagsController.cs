@@ -25,7 +25,7 @@ namespace ResourceLinks.Controllers
 
     public ActionResult Index()
     {
-      return View(_db.Tags.ToList());
+      return View(_db.Tags.OrderBy(x => x.Name).ToList());
     }
 
     public ActionResult Details(int id)

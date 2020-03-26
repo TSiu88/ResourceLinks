@@ -44,7 +44,11 @@ label {
   margin: 10px;
 }
 
-.links5 {
+#tagline {
+  background-color: #CCC;
+}
+
+/* .links5 {
   margin-top: 20px;
   font-size: 15px;
   display: grid;
@@ -70,7 +74,7 @@ label {
   font-size: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
+} */
 
 .link {
   font-size: 20px;
