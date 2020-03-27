@@ -1,6 +1,6 @@
 # _[Resource Links](https://github.com/TSiu88/ResourceLinks)_
 
-#### _Brief desc of Project, 03.24.2020_
+#### _Share Resource Links, 03.24.2020_
 
 #### By _**Tiffany Siu and Andriy Veremyeyev**_
 
